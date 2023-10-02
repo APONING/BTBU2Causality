@@ -1,6 +1,6 @@
 FROM python:3.8.0
 COPY . .
-RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118 \
+RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
 RUN pip install -r requirements.txt
 
 # RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
