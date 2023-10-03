@@ -15,16 +15,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # 更新 pip
-RUN python3.8 -m pip install pip --upgrade && \
-    python3.8 -m pip install wheel
+RUN pip install pip --upgrade && \
+    pip install wheel
 
 # 安装 PyTorch
 RUN pip install tqdm \
-    && pip3 install --progress-bar=auto --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+    && pip3 install --progress-bar=on --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
 
 COPY . .
 
-RUN pip install -r requirements.txt"
+RUN pip install -r requirements.txt
 
 
 # RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
