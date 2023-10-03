@@ -1,7 +1,31 @@
-FROM python:3.8.0
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    curl \
+    wget \
+    ca-certificates \
+    libjpeg-dev \
+    libpng-dev \
+    python3 \
+    python3-dev \
+    python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
+# 更新 pip
+RUN python3.8 -m pip install pip --upgrade && \
+    python3.8 -m pip install wheel
+
+# 安装 PyTorch
+RUN pip install tqdm \
+    && pip3 install --progress-bar=auto --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+
 COPY . .
-RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
-RUN pip install -r requirements.txt
+
+RUN pip install -r requirements.txt"
+
 
 # RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 # RUN pip install -r requirements.txt -i https://download.pytorch.org/whl/nightly/cu118
